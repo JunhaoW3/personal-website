@@ -47,6 +47,7 @@ main {
   font: 11px var(--mono);
   letter-spacing: 0.08em;
   text-transform: uppercase;
+  margin-right: 24px
 }
 .nav-links a {
   opacity: 0.8;
@@ -64,6 +65,32 @@ main {
 .nav-contact span {
   margin-left: 8px;
   font-size: 15px;
+}
+
+.blog-sidebar-link {
+  position: fixed;
+  z-index: 10;
+  top: 50%;
+  right: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 12px;
+  border: 1px solid rgba(242, 238, 228, 0.35);
+  border-right: 0;
+  background: var(--ink);
+  color: var(--paper);
+  font: 10px var(--mono);
+  letter-spacing: 0.1em;
+  text-decoration: none;
+  text-transform: uppercase;
+  writing-mode: vertical-rl;
+  transform: translateY(-50%);
+}
+
+.blog-sidebar-link span {
+  color: var(--orange);
+  font-size: 16px;
 }
 .range-hero {
   position: relative;
@@ -105,8 +132,8 @@ main {
   font-weight: 500;
 }
 .range-subtitle {
-  max-width: 300px;
-  margin: 34px 5px 5px;
+  max-width: 400px;
+  margin: 34px 0px 5px;
   color: #bbc3b9;
   font-size: 15px;
   font-family: 'Times New Roman', Times, serif;
@@ -411,6 +438,89 @@ main {
   color: var(--ink);
   text-decoration: none;
 }
+
+.blog-page { min-height: 100vh; background: var(--paper); }
+.blog-nav { display: flex; align-items: center; justify-content: space-between; padding-top: 28px; }
+.back-link { color: #626961; font: 11px var(--mono); letter-spacing: .08em; text-decoration: none; text-transform: uppercase; }
+.blog-hero { padding: 125px 0 90px; border-bottom: 1px solid #c9c7bd; }
+.blog-hero h1 { margin: 0; font-size: clamp(58px, 8vw, 104px); letter-spacing: -.07em; line-height: .86; }
+.blog-hero h1 em { color: var(--orange); font-family: var(--serif); font-weight: 500; }
+.blog-hero > p:last-child { max-width: 340px; margin: 35px 0 0 38%; color: #626961; line-height: 1.6; }
+.blog-content { padding: 55px 0 110px; }
+.blog-tabs { display: flex; gap: 10px; margin-bottom: 45px; }
+.blog-tabs button { border: 1px solid #b8b7ae; border-radius: 99px; padding: 11px 16px; background: transparent; color: #626961; font: 10px var(--mono); letter-spacing: .1em; text-transform: uppercase; cursor: pointer; }
+.blog-tabs button.active, .blog-tabs button:hover { border-color: var(--ink); background: var(--ink); color: var(--paper); }
+.blog-page-list { max-width: 800px; }
+.blog-page-entry { display: grid; grid-template-columns: 150px 1fr; gap: 30px; padding: 28px 0; border-top: 1px solid #c9c7bd; }
+.blog-page-entry h2 { margin: 7px 0 13px; font-size: clamp(28px, 4vw, 46px); letter-spacing: -.05em; line-height: .95; }
+.blog-page-entry div > p:not(.entry-category) { max-width: 500px; margin: 0 0 18px; color: #626961; line-height: 1.6; }
+.entry-category { margin: 0; color: var(--orange); font: 10px var(--mono); letter-spacing: .1em; text-transform: uppercase; }
+.blog-page-entry a { color: var(--ink); font: 10px var(--mono); letter-spacing: .08em; text-decoration: none; text-transform: uppercase; }.blog-page-entry a span { color: var(--orange); font-size: 16px; }
+@media (max-width: 800px) { .blog-nav { padding-top: 20px; }.blog-hero { padding: 95px 0 65px; }.blog-hero > p:last-child { margin-left: 0; }.blog-page-entry { grid-template-columns: 1fr; gap: 10px; } }
+
+.blog {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 12%;
+  padding: 110px 0;
+  border-bottom: 1px solid #c9c7bd;
+}
+
+.blog-heading h2 {
+  margin: 0 0 18px;
+  font-size: clamp(44px, 5vw, 70px);
+  letter-spacing: -0.06em;
+  line-height: 0.95;
+}
+
+.blog-heading > p:last-child {
+  max-width: 260px;
+  color: #626961;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.blog-entry {
+  display: grid;
+  grid-template-columns: 130px 1fr;
+  gap: 24px;
+  padding: 22px 0;
+  border-top: 1px solid #c9c7bd;
+}
+
+.blog-date {
+  margin: 0;
+  color: #777d74;
+  font: 10px var(--mono);
+  letter-spacing: 0.08em;
+}
+
+.blog-entry h3 {
+  margin: 0 0 10px;
+  font-size: 23px;
+  letter-spacing: -0.03em;
+}
+
+.blog-entry div > p {
+  max-width: 450px;
+  margin: 0 0 15px;
+  color: #626961;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.blog-entry a {
+  color: var(--ink);
+  font: 10px var(--mono);
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.blog-entry a span {
+  color: var(--orange);
+  font-size: 16px;
+}
 /* The supplied relief map is the visual foundation; these layers keep it interactive. */
 .topo-map {
   background-position: center;
@@ -444,7 +554,7 @@ main {
 
 .range-subtitle {
   max-width: 300px;
-  margin: 0 8% 0 0;
+  margin: 0 0 0 0;
 }
 
 .topo-map {
@@ -478,7 +588,7 @@ main {
   }
 
   .range-subtitle {
-    margin: 24px 0px 0px;
+    margin: 20px 0px 0px;
   }
 
   .topo-map {
@@ -503,6 +613,15 @@ main {
     gap: 50px;
     padding: 80px 0;
   }
+  .blog {
+    grid-template-columns: 1fr;
+    gap: 45px;
+    padding: 80px 0;
+  }
+  .blog-entry {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
   .footer {
     flex-wrap: wrap;
     gap: 15px;
@@ -510,5 +629,15 @@ main {
   .footer span:nth-child(2) {
     order: 3;
     width: 100%;
+  }
+  .blog-sidebar-link {
+    top: auto;
+    right: 14px;
+    bottom: 18px;
+    flex-direction: row;
+    padding: 10px 12px;
+    border: 1px solid rgba(242, 238, 228, 0.35);
+    writing-mode: horizontal-tb;
+    transform: none;
   }
 }
