@@ -1,121 +1,82 @@
 import { useState } from 'react'
-import heroImg from './assets/hero.png'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import './App.css'
+import topographyImage from './assets/mountain-topography.jpeg'
+
+const projects = [
+  { id: 'trail-atlas', number: '01', name: 'Trail Atlas', type: 'FIELD NOTES', year: '2024', description: 'A route-planning experience for collecting trail notes, conditions, and the details that never make it onto a map.', tags: ['React', 'Maps', 'UX'], position: { left: '20%', top: '39%' } },
+  { id: 'basecamp', number: '02', name: 'Basecamp', type: 'COMMUNITY', year: '2024', description: 'A lightweight climbing journal for sharing conditions, lessons learned, and the next line worth trying.', tags: ['Product', 'Community', 'Design'], position: { left: '51%', top: '22%' } },
+  { id: 'contour', number: '03', name: 'Contour', type: 'EXPERIMENT', year: '2023', description: 'An exploration of how elevation, weather, and time can shape a more human project dashboard.', tags: ['Data', 'Motion', 'Web'], position: { left: '77%', top: '43%' } },
+]
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [selectedProject, setSelectedProject] = useState(projects[1])
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
+    // Top navigation buttons
+    <main>
+      <nav className="nav shell" aria-label="Main navigation">
+        <a className="wordmark" href="#top">
+          JUNHAO<span>W3</span>
+        </a>
+        <div className="nav-links">
+          <a href="#range">The range</a>
+          <a href="#about">About</a>
+          <a className="nav-contact" href="mailto:wupillow@gmail.com">
+            Say hello <span>↗</span>
+          </a>
         </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
+      </nav>
+
+      {/* // Topographical Map */}
+      <section className="range-hero shell" id="top">
+        <div className="range-intro">
+          <p className="eyebrow">A PERSONAL PROJECT RANGE</p>
+          <p className="range-subtitle">A topographical index of things I&apos;ve made, learned, and carried up the hill.</p>
         </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
+        <div className="topo-map" id="range" style={{ backgroundImage: `url(${topographyImage.src})` }} aria-label="Interactive topographical project map">
+          <div className="map-grid"></div>
+          <div className="map-ridge ridge-one"></div><div className="map-ridge ridge-two"></div><div className="map-ridge ridge-three"></div>
+          <div className="peak-shape peak-left"></div><div className="peak-shape peak-center"></div><div className="peak-shape peak-right"></div>
+          <div className="contour contour-one"></div><div className="contour contour-two"></div><div className="contour contour-three"></div>
+          {projects.map(
+            (project) => <button key={project.id}
+              className={`peak-marker ${selectedProject.id === project.id ? 'selected' : ''}`}
+              style={project.position} onClick={() => setSelectedProject(project)} 
+              aria-label={`View ${project.name} project`}>
+              <span className="marker-dot"></span><span className="marker-label">{project.number} / {project.name}</span></button>)}
+          <span className="map-coordinate coordinate-one">01° 21′ N<br />103° 49′ E</span>
+          <span className="map-coordinate coordinate-two">NORTH<br />RIDGE</span>
+          <span className="map-scale">N ↑<br /><span>—— 5 km</span></span>
+        </div>
+        <div className="map-instruction"><span className="instruction-dot"></span> SELECT A SUMMIT TO EXPLORE</div>
       </section>
 
-      <div className="ticks"></div>
-
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
+      <section className="project-detail shell" aria-live="polite">
+        <div className="detail-index">{selectedProject.number}<span>/ 03</span></div>
+        <div className="detail-content">
+          <p className="eyebrow">{selectedProject.type} · {selectedProject.year}</p>
+          <h2>{selectedProject.name}</h2>
+          <p>{selectedProject.description}</p>
+          <div className="tags">{selectedProject.tags.map((tag) => <span key={tag}>{tag}</span>)}</div>
+          <a className="text-link" href={`#${selectedProject.id}`}>View project <span>↗</span></a>
         </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
+        <div className="detail-ascent">
+          <span>ASCENT LOG</span>
+          <strong>{selectedProject.number === '01' ? '4,096' : selectedProject.number === '02' ? '5,895' : '6,189'} m</strong>
+          <small>PROJECT ELEVATION</small>
         </div>
       </section>
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
+      <section className="about shell" id="about">
+        <div className="about-stamp">KEEP<br /><span>↑</span><br />GOING</div>
+        <div className="about-copy">
+          <p className="eyebrow">THE SHORT VERSION</p>
+          <h2>Good work starts with<br /><em>paying attention.</em></h2>
+          <p>I care about the small decisions: the words that make a button feel obvious, the rhythm that makes a page feel calm, and the details that help people find their way.</p>
+          <a className="text-link" href="mailto:wupillow@gmail.com">Let&apos;s talk <span>↗</span></a>
+        </div>
+      </section>
+      <footer className="footer shell"><span>© 2024 Junhao</span><span>Made between sea level and the summit.</span><a href="#top">Back to top ↑</a></footer>
+    </main>
   )
 }
 
